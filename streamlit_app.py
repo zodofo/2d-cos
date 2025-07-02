@@ -17,15 +17,15 @@ from matplotlib.colors import LinearSegmentedColormap, BoundaryNorm
 from scipy.signal import hilbert
 from scipy.ndimage import gaussian_filter
 import streamlit as st
-import matplotlib.font_manager as fm
-# 查看系统中的所有字体
-for font in fm.findSystemFonts(fontpaths=None, fontext='ttf'):
-    if 'SimHei' in font or 'SimSun' in font:
-        print(font)
+from pathlib import Path
+import matplotlib as mpl
 
-# 设置找到的中文字体路径
-plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['axes.unicode_minus'] = False
+FONT_PATH = Path(__file__).parent / "fonts" / "NotoSansSC-VariableFont_wght.ttf"
+if FONT_PATH.exists():
+    mpl.font_manager.fontManager.addfont(str(FONT_PATH))
+    mpl.rcParams["font.family"] = "Noto Sans SC"
+mpl.rcParams["axes.unicode_minus"] = False
+
 
 # ================= 自定义绿‑白‑红渐变色 ================= #
 cmap = LinearSegmentedColormap.from_list(
