@@ -20,11 +20,18 @@ import streamlit as st
 from pathlib import Path
 import matplotlib as mpl
 
-FONT_PATH = Path(__file__).parent / "fonts" / "NotoSansSC-VariableFont_wght.ttf"
+# ---- ① 指定字体文件路径 ----
+FONT_PATH = Path(__file__).parent / "fonts" / "NotoSansCJKsc-Regular.otf"
+# 如果你用 apt 安装系统字体（packages.txt → fonts-noto-cjk），
+# 可以把这一行改成系统路径，或者直接省略 addfont()。
+
+# ---- ② 动态注册 & 设置默认字体 ----
 if FONT_PATH.exists():
     mpl.font_manager.fontManager.addfont(str(FONT_PATH))
-    mpl.rcParams["font.family"] = "Noto Sans SC"
+    mpl.rcParams["font.family"] = "Noto Sans CJK SC"   # 与字体内部 family 同名
+# 正负号正常显示
 mpl.rcParams["axes.unicode_minus"] = False
+
 
 
 # ================= 自定义绿‑白‑红渐变色 ================= #
